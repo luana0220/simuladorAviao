@@ -25,7 +25,12 @@ public:
 	~ListaAviao();
 
 	void enfileirar(const Aviao& dado);
-	Aviao desenfileirar();
+	Aviao * desenfileirar();
+	bool estaVazia();
+	int size();
+	NoDeAviao * primeiroFila();
+	Aviao  desenfileirarAviaoEmergencia();
+	void decrementarComb();
 
 };
 
