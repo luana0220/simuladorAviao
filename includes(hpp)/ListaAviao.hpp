@@ -29,9 +29,10 @@ public:
 	bool estaVazia();
 	int size();
 	NoDeAviao * primeiroFila();
-	Aviao  desenfileirarAviaoEmergencia();
+	Aviao  desenfileirarAviaoEmergencia(NoDeAviao * no);
 	void decrementarComb();
-
+	bool temEmergencia();
+	NoDeAviao * noComMaisEmergencia();
 };
 
 

@@ -9,22 +9,21 @@
 #define INCLUDES_HPP__PISTA_HPP_
 
 #include "ListaAviao.hpp"
+#include "Aviao.hpp"
 
-struct Pista {
+class Pista {
+private:
 	int num; // 1, 2 ou 3
-	ListaAviao prateleiras[2];
-	ListaAviao *filaDec = nullptr;
-	bool ehParaPouso;
-	Pista(ListaAviao *fila1, ListaAviao *fila2, int num, bool ehParaPouso) :
-			num(num), ehParaPouso(ehParaPouso) {
-		prateleiras[0] = fila1;
-		prateleiras[1] = fila2;
-	}
+	bool estaSendoUsada; //usada para saber se a pista está sofrendo alguma ação
+	Aviao * aviaoNaPista;
 
-	Pista(int num, bool pouso, ListaAviao *filaDec) : num(num), ehParaPouso(pouso), filaDec(filaDec) {
-		prateleiras[0] = nullptr;
-		prateleiras[1] = nullptr;
-	}
+public:
+	Pista(int num);
+	bool estaOcupada() const;
+	void pousarAviao(Aviao * aviao);
+	void decolarAviao(Aviao * aviao);
+	void atualizarEstado();
+
 };
 
 

@@ -60,52 +60,56 @@ NoDeAviao * ListaAviao::primeiroFila() {
 	return primeiro;
 }
 
-Aviao ListaAviao::desenfileirarAviaoEmergencia() {
-	//if(no == primeiro) {
-		//desenfileirar();
-	//	return aviaoDeletado;
-	//}
+Aviao ListaAviao::desenfileirarAviaoEmergencia(NoDeAviao * no) {
+	if(no == nullptr) {
+		throw std::invalid_argument("Nó inválido!");
+	}
 
 	NoDeAviao * anterior = nullptr;
 	NoDeAviao * NoAtual = primeiro;
-
-	NoDeAviao * noMenor = primeiro;
-	NoDeAviao * anteriorMenor = nullptr;
-	while(NoAtual != nullptr) {
-
-		if (NoAtual->dado < noMenor->dado) {
-			noMenor = NoAtual;
-			anteriorMenor = anterior;
-		}
+	while (NoAtual != no) {
 		anterior = NoAtual;
 		NoAtual = NoAtual->proximo;
-
 	}
-	/*anterior = NoAtual;
+	anterior = NoAtual;
 	NoAtual = NoAtual->proximo;
-	anterior->proximo = NoAtual->proximo;*/
-
-	Aviao aviaoDeletado = noMenor->dado;
-	if(noMenor == primeiro) {
-		desenfileirar();
+	Aviao a = NoAtual->dado;
+	if (anterior == nullptr) {
+		primeiro = NoAtual->proximo;
 	} else {
-		anteriorMenor->proximo = noMenor->proximo;
-		if(noMenor == ultimo) {
-			ultimo = anteriorMenor;
-		}
-		delete noMenor;
-		tamanho--;
+		anterior->proximo = NoAtual->proximo;
 	}
-	return aviaoDeletado;
 
+	delete NoAtual;
+	tamanho--;
+	return a;
 }
 
-void ListaAviao::decrementarComb() {
-	NoDeAviao * NoAtual = primeiro;
-	while(NoAtual != nullptr) {
-		if(NoAtual->dado.ehPouso) {
-			NoAtual->dado.diminuirComb();
+
+bool ListaAviao::temEmergencia() {
+	NoDeAviao * noAtual = primeiro;
+	while(noAtual != nullptr) {
+		if(noAtual->dado.combustivel <= 0) {
+			return true;
+		} else {
+			noAtual = noAtual->proximo;
 		}
+	}
+	return false;
+}
+
+NoDeAviao * ListaAviao::noComMaisEmergencia() {
+
+	NoDeAviao *NoAtual = primeiro;
+
+	NoDeAviao *noMenor = primeiro;
+
+	while (NoAtual != nullptr) {
+			if (NoAtual->dado < noMenor->dado) {
+				noMenor = NoAtual;
+			}
 		NoAtual = NoAtual->proximo;
 	}
+	return noMenor;
+
 }

@@ -12,39 +12,29 @@
 #include "Pista.hpp"
 #include<vector>
 
-Simulador::Simulador() : tempoAtual(0), IDAviao(1){
-	filaAterrissagem1A = new ListaAviao();
-	filaAterrissagem1B = new ListaAviao();
-	filaAterrissagem2A = new ListaAviao();
-	filaAterrissagem2B = new ListaAviao();
-	filaDecolagem1 = new ListaAviao();
-	filaDecolagem2 = new ListaAviao();
-	filaDecolagem3 = new ListaAviao();
+Simulador::Simulador(const int TEMPO_SIMULACAO) : tempoAtual(0), IDAviao(1) {}
 
-	pista1 = new Pista(1, false,  filaDecolagem1);
-	pista2 = new Pista(2, false, filaDecolagem2);
-	pista3 = new Pista(3, false, filaDecolagem3);
-}
-
-ListaAviao* Simulador::verificarMenorFilaAterr(ListaAviao * filaAterrissagem1A, ListaAviao *filaAterrissagem1B,ListaAviao *filaAterrissagem2A, ListaAviao *filaAterrissagem2B) {
+ListaAviao* Simulador::verificarMenorFilaAterr() {
 	ListaAviao * menorFila = filaAterrissagem1A;
-	if(menorFila->size() > filaAterrissagem1B->size()) {
+	if(menorFila->size() > filaAterrissagem1B.size()) {
 		menorFila = filaAterrissagem1B;
-	} else if (menorFila->size() > filaAterrissagem2A->size()) {
+	}
+	if (menorFila->size() > filaAterrissagem2A.size()) {
 		menorFila = filaAterrissagem2A;
-	} else if (menorFila->size() > filaAterrissagem2B->size()) {
+	}
+	if (menorFila->size() > filaAterrissagem2B.size()) {
 		menorFila = filaAterrissagem2B;
 	}
 
 	return menorFila;
 }
 
-ListaAviao* Simulador::menorFilaDec(ListaAviao *lista1, ListaAviao *lista2, ListaAviao *lista3) {
-	ListaAviao* menor = lista1;
-	if (lista2->size() < menor->size()) {
-		menor = lista2;
-	} else if (lista3->size() < menor->size()) {
-		menor = lista3;
+ListaAviao* Simulador::menorFilaDec() {
+	ListaAviao* menor = filaDecolagem1;
+	if (filaDecolagem2.size() < menor->size()) {
+		menor = filaDecolagem2;
+	} else if (filaDecolagem3.size() < menor->size()) {
+		menor = filaDecolagem3;
 	}
 	return menor;
 }
@@ -57,13 +47,13 @@ void Simulador::criarAvioes() {
 
 	for (int i = 0; i <  avioesParaPousar; i++){
 		int combustivel = rand() % 21;
-		ListaAviao * filaParaEnfileirar = verificarMenorFilaAterr(filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B);
+		ListaAviao * filaParaEnfileirar = verificarMenorFilaAterr();
 		filaParaEnfileirar->enfileirar(Aviao(combustivel,IDaviaoImp, tempoAtual,  true, -1));
 		IDaviaoImp += 2;
 	}
 
 	for (int i = 0; i < avioesParaDecolar; i++) {
-		ListaAviao * fila = menorFilaDec(filaDecolagem1, filaDecolagem2, filaDecolagem3);
+		ListaAviao * fila = menorFilaDec();
 		fila->enfileirar(Aviao(0, IDaviaoPar, tempoAtual,  false, -1));
 		IDaviaoPar += 2;
 	}

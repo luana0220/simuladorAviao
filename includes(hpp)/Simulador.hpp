@@ -14,28 +14,28 @@
 #include "ListaAviao.hpp"
 #include "Pista.hpp"
 
-const int TEMPO = 60;
+
 
 class Simulador {
 private:
 	int tempoAtual;
 	int IDAviao;
-
+	const int TEMPO_SIMULACAO = 60;
 	Pista pista1, pista2, pista3;
 
 	//Filas de aterrisagem(2 para pista 1, e duas para pista2)
-	ListaAviao *filaAterrissagem1A, *filaAterrissagem1B, *filaAterrissagem2A, *filaAterrissagem2B;
-	ListaAviao *filaDecolagem1, *filaDecolagem2, *filaDecolagem3;
+	ListaAviao filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B;
+	ListaAviao filaDecolagem1, filaDecolagem2, filaDecolagem3;
 
 	void criarAvioes();
 	void decrementarComb();
 	void usarPista();
 	void aumentarTempoDeEspera();
 	void simulacaoUnidadesDeTempo();
-	ListaAviao* verificarMenorFilaAterr(ListaAviao * filaAterrissagem1A, ListaAviao *filaAterrissagem1B,ListaAviao *filaAterrissagem2A, ListaAviao *filaAterrissagem2B);
-	ListaAviao* menorFilaDec(ListaAviao *lista1, ListaAviao *lista2, ListaAviao *lista3);
+	ListaAviao* verificarMenorFilaAterr();
+	ListaAviao* menorFilaDec();
 	void verificarEmergencias();
-	Simulador();
+	Simulador(const int TEMPO_SIMULACAO);
 	void executar();
 
 
