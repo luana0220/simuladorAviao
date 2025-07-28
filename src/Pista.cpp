@@ -13,18 +13,16 @@ Pista::Pista (int num) {
 	this->aviaoNaPista = nullptr;
 }
 
-void Pista::pousarAviao(Aviao * aviao) {
+void Pista::pousarAviao(Aviao& aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
 	std::cout << "Avião " << aviao << " pousando na pista " << num << std::endl;
-	atualizarEstado();
 }
 
-void Pista::decolarAviao(Aviao * aviao) {
+void Pista::decolarAviao(Aviao&  aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
 	std::cout << "Avião " << aviao << " pousando na pista " << num << std::endl;
-	atualizarEstado();
 }
 
 void Pista::atualizarEstado() {

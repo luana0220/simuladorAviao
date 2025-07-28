@@ -25,14 +25,16 @@ public:
 	~ListaAviao();
 
 	void enfileirar(const Aviao& dado);
-	Aviao * desenfileirar();
+	Aviao *desenfileirar();
 	bool estaVazia();
 	int size();
 	NoDeAviao * primeiroFila();
-	Aviao  desenfileirarAviaoEmergencia(NoDeAviao * no);
+	Aviao desenfileirarAviaoPosicao(NoDeAviao * no);
 	void decrementarComb();
 	bool temEmergencia();
 	NoDeAviao * noComMaisEmergencia();
+	NoDeAviao * noComMaisTempoDeEspera();
+	void aumentarTempoEspera() ;
 };
 
 

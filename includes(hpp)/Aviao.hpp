@@ -20,7 +20,14 @@ struct Aviao {
 	bool ehPouso;
 
 	Aviao (int comb, int id, int tempo, bool ehPouso) : combustivel(comb), ID(id), tempoEspera(tempo), ehPouso(ehPouso) {}
+	void decrementarCombAviao() {
+		combustivel--;
+	}
 
+
+	void aumentarTempoDeEspera() {
+		tempoEspera++;
+	}
 
 
 };
@@ -32,10 +39,13 @@ std::ostream& operator<<(std::ostream& os, const Aviao& aviao) {
 	return os;
 }
 
-bool operator < (const Aviao& aviao, Aviao aviao2) {
+bool operator < (const Aviao& aviao, const Aviao aviao2) {
 		return aviao.combustivel <= aviao2.combustivel;
 }
 
+bool operator > (const Aviao& a1, const Aviao a2) {
+	return a1.tempoEspera > a2.tempoEspera;
+}
 
 
 

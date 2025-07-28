@@ -10,9 +10,6 @@
 #include <iostream>
 
 int main() {
-	ListaAviao pista1;
-	Aviao aviao(10, 1, 20, true, 2);
-	pista1.enfileirar(aviao);
 	return 0;
 }
 

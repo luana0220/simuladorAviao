@@ -20,8 +20,8 @@ private:
 public:
 	Pista(int num);
 	bool estaOcupada() const;
-	void pousarAviao(Aviao * aviao);
-	void decolarAviao(Aviao * aviao);
+	void pousarAviao(Aviao& aviao);
+	void decolarAviao(Aviao& aviao);
 	void atualizarEstado();
 
 };

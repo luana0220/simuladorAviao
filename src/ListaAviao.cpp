@@ -60,7 +60,7 @@ NoDeAviao * ListaAviao::primeiroFila() {
 	return primeiro;
 }
 
-Aviao ListaAviao::desenfileirarAviaoEmergencia(NoDeAviao * no) {
+Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 	if(no == nullptr) {
 		throw std::invalid_argument("Nó inválido!");
 	}
@@ -111,5 +111,33 @@ NoDeAviao * ListaAviao::noComMaisEmergencia() {
 		NoAtual = NoAtual->proximo;
 	}
 	return noMenor;
+}
 
+void ListaAviao::decrementarComb() {
+	NoDeAviao *noAtual = primeiro;
+	while (noAtual != nullptr) {
+		noAtual->dado.decrementarCombAviao();
+		noAtual = primeiro->proximo;
+	}
+}
+
+void ListaAviao::aumentarTempoEspera() {
+	NoDeAviao *noAtual = primeiro;
+	while (noAtual != nullptr) {
+		noAtual->dado.aumentarTempoDeEspera();
+		noAtual = primeiro->proximo;
+	}
+}
+
+NoDeAviao * ListaAviao::noComMaisTempoDeEspera() {
+	NoDeAviao *NoAtual = primeiro;
+	NoDeAviao *noMaior = primeiro;
+
+	while(NoAtual != nullptr) {
+		if (NoAtual->dado > noMaior->dado) {
+			noMaior = NoAtual;
+		}
+		NoAtual = primeiro->proximo;
+	}
+	return noMaior;
 }
