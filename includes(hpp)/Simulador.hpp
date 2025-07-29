@@ -36,8 +36,8 @@ private:
 	void usarPista();
 	void aumentarTempoDeEspera();
 	void simulacaoUnidadesDeTempo();
-	ListaAviao* verificarMenorFilaAterr();
-	ListaAviao* menorFilaDec();
+	ListaAviao& verificarMenorFilaAterr();
+	ListaAviao& menorFilaDec();
 	void verificarEmergencias();
 	Simulador(const int TEMPO_SIMULACAO);
 	void executar();

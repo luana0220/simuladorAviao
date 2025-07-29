@@ -7,12 +7,7 @@
 
 #include "Pista.hpp"
 
-Pista::Pista (int num) {
-	this->estaSendoUsada = estaSendoUsada;
-	this->num = num;
-	this->aviaoNaPista = nullptr;
-}
-
+Pista::Pista (int num) : num(num), estaSendoUsada(false), aviaoNaPista() {}
 void Pista::pousarAviao(Aviao& aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
@@ -27,7 +22,6 @@ void Pista::decolarAviao(Aviao&  aviao) {
 
 void Pista::atualizarEstado() {
 	estaSendoUsada = false;
-	aviaoNaPista = nullptr;
 }
 
 bool Pista::estaOcupada() const {

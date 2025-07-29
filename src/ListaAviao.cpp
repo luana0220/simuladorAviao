@@ -24,7 +24,7 @@ void ListaAviao::enfileirar(const Aviao& dado) {
 }
 
 ListaAviao::~ListaAviao() {
-	ListaAviao * deletar;
+	NoDeAviao * deletar;
 	while (primeiro != nullptr) {
 		deletar = primeiro;
 		primeiro = primeiro->proximo;
@@ -37,19 +37,6 @@ ListaAviao::~ListaAviao() {
 
 bool ListaAviao::estaVazia() {
 	return primeiro == nullptr;
-}
-
-Aviao * ListaAviao::desenfileirar() {
-	if (estaVazia()) {
-		throw std::runtime_error("Pista Vazia");
-	}
-
-	Aviao * AviaoQuePousou = primeiro;
-	NoDeAviao * temp = primeiro;
-	primeiro = primeiro->proximo;
-	delete temp;
-	tamanho--;
-	return AviaoQuePousou;
 }
 
 int ListaAviao::size() {
@@ -71,8 +58,6 @@ Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 		anterior = NoAtual;
 		NoAtual = NoAtual->proximo;
 	}
-	anterior = NoAtual;
-	NoAtual = NoAtual->proximo;
 	Aviao a = NoAtual->dado;
 	if (anterior == nullptr) {
 		primeiro = NoAtual->proximo;
@@ -117,7 +102,7 @@ void ListaAviao::decrementarComb() {
 	NoDeAviao *noAtual = primeiro;
 	while (noAtual != nullptr) {
 		noAtual->dado.decrementarCombAviao();
-		noAtual = primeiro->proximo;
+		noAtual = noAtual->proximo;
 	}
 }
 
@@ -125,7 +110,7 @@ void ListaAviao::aumentarTempoEspera() {
 	NoDeAviao *noAtual = primeiro;
 	while (noAtual != nullptr) {
 		noAtual->dado.aumentarTempoDeEspera();
-		noAtual = primeiro->proximo;
+		noAtual = noAtual->proximo;
 	}
 }
 
@@ -137,7 +122,7 @@ NoDeAviao * ListaAviao::noComMaisTempoDeEspera() {
 		if (NoAtual->dado > noMaior->dado) {
 			noMaior = NoAtual;
 		}
-		NoAtual = primeiro->proximo;
+		NoAtual = NoAtual->proximo;
 	}
 	return noMaior;
 }

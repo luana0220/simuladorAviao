@@ -10,6 +10,14 @@
 #include <iostream>
 
 int main() {
+	Aviao a1(20, 2, 25, true);
+	Aviao a3(15, 3, 55, true);
+	Aviao a2(5, 5, 0, true);
+
+	std::cout << a1;
+	std::cout << a2;
+	std::cout << a3;
+
 	return 0;
 }
 

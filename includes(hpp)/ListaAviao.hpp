@@ -25,7 +25,6 @@ public:
 	~ListaAviao();
 
 	void enfileirar(const Aviao& dado);
-	Aviao *desenfileirar();
 	bool estaVazia();
 	int size();
 	NoDeAviao * primeiroFila();

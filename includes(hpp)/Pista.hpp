@@ -15,7 +15,7 @@ class Pista {
 private:
 	int num; // 1, 2 ou 3
 	bool estaSendoUsada; //usada para saber se a pista está sofrendo alguma ação
-	Aviao * aviaoNaPista;
+	Aviao  aviaoNaPista;
 
 public:
 	Pista(int num);

@@ -19,33 +19,22 @@ struct Aviao {
 	int tempoEspera;
 	bool ehPouso;
 
-	Aviao (int comb, int id, int tempo, bool ehPouso) : combustivel(comb), ID(id), tempoEspera(tempo), ehPouso(ehPouso) {}
-	void decrementarCombAviao() {
-		combustivel--;
-	}
+	Aviao();
+	Aviao (int comb, int id, int tempo, bool ehPouso);
+	void decrementarCombAviao();
 
 
-	void aumentarTempoDeEspera() {
-		tempoEspera++;
-	}
+	void aumentarTempoDeEspera();
 
+
+
+	friend std::ostream& operator<<(std::ostream &os, const Aviao &a);
+	friend bool operator<(const Aviao &a1, const Aviao &a2);
+	friend bool operator>(const Aviao &a1, const Aviao &a2);
 
 };
 
-std::ostream& operator<<(std::ostream& os, const Aviao& aviao) {
-	if (aviao.ehPouso) {
-		os << "Avião de Id " << aviao.ID << "pousou com " << aviao.combustivel << "un. combustível" << " e esperou "<< aviao.tempoEspera << std::endl;
-	}
-	return os;
-}
 
-bool operator < (const Aviao& aviao, const Aviao aviao2) {
-		return aviao.combustivel <= aviao2.combustivel;
-}
-
-bool operator > (const Aviao& a1, const Aviao a2) {
-	return a1.tempoEspera > a2.tempoEspera;
-}
 
 
 

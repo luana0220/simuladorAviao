@@ -13,28 +13,28 @@
 #include<vector>
 #include "Aviao.hpp"
 
-Simulador::Simulador(const int TEMPO_SIMULACAO) : tempoAtual(0), IDAviao(1), pousosDeEmergencia(0),  pousosNormais(0), totalDePousos(0), totalPousosEmergencias(0) {}
+Simulador::Simulador(const int TEMPO_SIMULACAO) : tempoAtual(0), IDAviao(1), pista1(1), pista2(2), pista3(3), pousosDeEmergencia(0),  pousosNormais(0), totalDePousos(0), totalPousosEmergencias(0){}
 
-ListaAviao* Simulador::verificarMenorFilaAterr() {
-	ListaAviao * menorFila = filaAterrissagem1A;
-	if(menorFila->size() > filaAterrissagem1B.size()) {
+ListaAviao& Simulador::verificarMenorFilaAterr() {
+	ListaAviao& menorFila = filaAterrissagem1A;
+	if(menorFila.size() > filaAterrissagem1B.size()) {
 		menorFila = filaAterrissagem1B;
 	}
-	if (menorFila->size() > filaAterrissagem2A.size()) {
+	if (menorFila.size() > filaAterrissagem2A.size()) {
 		menorFila = filaAterrissagem2A;
 	}
-	if (menorFila->size() > filaAterrissagem2B.size()) {
+	if (menorFila.size() > filaAterrissagem2B.size()) {
 		menorFila = filaAterrissagem2B;
 	}
 
 	return menorFila;
 }
 
-ListaAviao* Simulador::menorFilaDec() {
-	ListaAviao* menor = filaDecolagem1;
-	if (filaDecolagem2.size() < menor->size()) {
+ListaAviao& Simulador::menorFilaDec() {
+	ListaAviao& menor = filaDecolagem1;
+	if (filaDecolagem2.size() < menor.size()) {
 		menor = filaDecolagem2;
-	} else if (filaDecolagem3.size() < menor->size()) {
+	} else if (filaDecolagem3.size() < menor.size()) {
 		menor = filaDecolagem3;
 	}
 	return menor;
@@ -48,14 +48,14 @@ void Simulador::criarAvioes() {
 
 	for (int i = 0; i <  avioesParaPousar; i++){
 		int combustivel = rand() % 21;
-		ListaAviao * filaParaEnfileirar = verificarMenorFilaAterr();
-		filaParaEnfileirar->enfileirar(Aviao(combustivel,IDaviaoImp, tempoAtual,  true));
+		ListaAviao& filaParaEnfileirar = verificarMenorFilaAterr();
+		filaParaEnfileirar.enfileirar(Aviao(combustivel,IDaviaoImp, tempoAtual,  true));
 		IDaviaoImp += 2;
 	}
 
 	for (int i = 0; i < avioesParaDecolar; i++) {
-		ListaAviao * fila = menorFilaDec();
-		fila->enfileirar(Aviao(0, IDaviaoPar, tempoAtual,  false));
+		ListaAviao& fila = menorFilaDec();
+		fila.enfileirar(Aviao(0, IDaviaoPar, tempoAtual,  false));
 		IDaviaoPar += 2;
 	}
 
@@ -85,10 +85,9 @@ void Simulador::desocuparPistas() {
 
 void Simulador::pousandoEmergencias() {
 	ListaAviao * listaDeFilasDePouso [] = {&filaAterrissagem1A, &filaAterrissagem1B, &filaAterrissagem2A, &filaAterrissagem2B};
-	Aviao  a;
 	for(int i = 0 ;i < 4 && pousosDeEmergencia < 3; i++) {
 		if(listaDeFilasDePouso[i]->temEmergencia()) {
-			 a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(listaDeFilasDePouso[i]->noComMaisEmergencia());
+			Aviao a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(listaDeFilasDePouso[i]->noComMaisEmergencia());
 			 if(!pista3.estaOcupada()) {
 				 pista3.pousarAviao(a);
 				 pousosDeEmergencia++;
@@ -107,9 +106,8 @@ void Simulador::pousandoEmergencias() {
 void Simulador::pousosRegulares() {
 	pousosNormais = 0;
 	ListaAviao * listaDeFilasDePouso [] = {&filaAterrissagem1A, &filaAterrissagem1B, &filaAterrissagem2A, &filaAterrissagem2B};
-	Aviao  a;
 	for(int i = 0 ;i < 4 && pousosNormais <= 3; i++) {
-		a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(listaDeFilasDePouso[i]->noComMaisTempoDeEspera());
+		Aviao a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(listaDeFilasDePouso[i]->noComMaisTempoDeEspera());
 		if(i == 0 || i == 1) {
 			if(!pista1.estaOcupada()) {
 			pista1.pousarAviao(a);
@@ -122,8 +120,8 @@ void Simulador::pousosRegulares() {
 			}
 		}
 	}
-	totalPousosEmergencias += pousosNormais;
-	totalDePousos += totalPousosEmergencias;
+	totalPousosEmergencias += pousosDeEmergencia;
+	totalDePousos += pousosNormais + pousosDeEmergencia;
 }
 
 
