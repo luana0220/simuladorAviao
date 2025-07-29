@@ -26,6 +26,7 @@ private:
 	int totalDePousos;
 	int pousosNormais;
 	int totalPousosEmergencias;
+	int numDecolagens;
 
 	//Filas de aterrisagem(2 para pista 1, e duas para pista2)
 	ListaAviao filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B;
@@ -36,14 +37,18 @@ private:
 	void usarPista();
 	void aumentarTempoDeEspera();
 	void simulacaoUnidadesDeTempo();
-	ListaAviao& verificarMenorFilaAterr();
-	ListaAviao& menorFilaDec();
+	ListaAviao * verificarMenorFilaAterr();
+	ListaAviao *  menorFilaDec();
 	void verificarEmergencias();
 	Simulador(const int TEMPO_SIMULACAO);
 	void executar();
 	void pousandoEmergencias();
 	void pousosRegulares();
 	void desocuparPistas();
+	void decolandoAvioes();
+	void imprimirInfoAcada10un();
+	void imprimirFilasDePouso();
+	void imprimirFilaDecolagem();
 };
 
 

@@ -126,3 +126,14 @@ NoDeAviao * ListaAviao::noComMaisTempoDeEspera() {
 	}
 	return noMaior;
 }
+
+void ListaAviao::imprimirAvioes() {
+	if(estaVazia()) {
+		throw std::runtime_error("Fila Vazia!!");
+	}
+	NoDeAviao * temp = primeiro;
+	while(temp != nullptr) {
+		std::cout << temp->dado.imprimirAviao(temp->dado) << "  " << std::endl;
+		temp = temp->proximo;
+	}
+}

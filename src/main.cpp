@@ -18,6 +18,11 @@ int main() {
 	std::cout << a2;
 	std::cout << a3;
 
+	if(a1 < a2) {
+		std::cout << "Avião 1"<< a1 << "tem menos combustível";
+	} else
+		std::cout << "Avião 2"<< a2 << " tem menos combustivel";
+
 	return 0;
 }
 

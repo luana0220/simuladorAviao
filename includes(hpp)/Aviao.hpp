@@ -32,6 +32,9 @@ struct Aviao {
 	friend bool operator<(const Aviao &a1, const Aviao &a2);
 	friend bool operator>(const Aviao &a1, const Aviao &a2);
 
+	void imprimirAviao(const Aviao &a);
+	//friend
+
 };
 
 

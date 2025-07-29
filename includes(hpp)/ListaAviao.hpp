@@ -34,6 +34,7 @@ public:
 	NoDeAviao * noComMaisEmergencia();
 	NoDeAviao * noComMaisTempoDeEspera();
 	void aumentarTempoEspera() ;
+	void imprimirAvioes();
 };
 
 
