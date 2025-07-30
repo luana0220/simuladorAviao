@@ -19,7 +19,8 @@
 class Simulador {
 private:
 	int tempoAtual;
-	int IDAviao;
+	int IDAviaoPar;
+	int IDAviaoImp;
 	const int TEMPO_SIMULACAO = 60;
 	Pista pista1, pista2, pista3;
 	int pousosDeEmergencia;
@@ -27,6 +28,8 @@ private:
 	int pousosNormais;
 	int totalPousosEmergencias;
 	int numDecolagens;
+	int somaDosTemposDeEsperaDecolagem;
+	int somaDosTemposPousos;
 
 	//Filas de aterrisagem(2 para pista 1, e duas para pista2)
 	ListaAviao filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B;
@@ -40,8 +43,8 @@ private:
 	ListaAviao * verificarMenorFilaAterr();
 	ListaAviao *  menorFilaDec();
 	void verificarEmergencias();
-	Simulador(const int TEMPO_SIMULACAO);
-	void executar();
+
+
 	void pousandoEmergencias();
 	void pousosRegulares();
 	void desocuparPistas();
@@ -49,6 +52,11 @@ private:
 	void imprimirInfoAcada10un();
 	void imprimirFilasDePouso();
 	void imprimirFilaDecolagem();
+	float mediaTempoDeEsperaDecolagem();
+	float mediaTempoPousos();
+public:
+	void executar();
+	Simulador(const int TEMPO_SIMULACAO);
 };
 
 

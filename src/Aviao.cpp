@@ -24,29 +24,26 @@ void Aviao::aumentarTempoDeEspera() {
 }
 
 std::ostream& operator<<(std::ostream &os, const Aviao &aviao) {
-	if (aviao.ehPouso) {
+
 		os << "{ ID: " << aviao.ID << ", Combustível: " << aviao.combustivel << " un. combustível, " << " Tempo de espera:  " << aviao.tempoEspera << " un. de tempo  }"<< std::endl;
-	}
 	return os;
 }
 
 bool operator <(const Aviao &aviao, const Aviao &aviao2) {
-	return aviao.combustivel <= aviao2.combustivel;
+	return aviao.combustivel < aviao2.combustivel;
 }
 
 bool operator >(const Aviao &a1, const Aviao &a2) {
 	if( a1.tempoEspera > a2.tempoEspera) {
-		return a1;
-	} else if (a2.tempoEspera > a1.tempoEspera) {
-		return a2;
+		return true;
 	}
 	return false;
 }
 
 void Aviao::imprimirAviao(const Aviao &a) {
 		if(ehPouso) {
-			std::cout << " [ ID: " << a.ID << " Combustivel: " << a.combustivel << " ]" << std::endl;
+			std::cout << " [ ID: " << a.ID << ",  Combustivel: " << a.combustivel << " ]" << "  ";
 		} else
-			std::cout << " [ ID: " << a.ID << " ]" << std::endl;
+			std::cout << " [ ID: " << a.ID << " ]" << "  ";
 	}
 

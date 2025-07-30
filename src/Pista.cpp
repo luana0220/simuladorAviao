@@ -11,13 +11,13 @@ Pista::Pista (int num) : num(num), estaSendoUsada(false), aviaoNaPista() {}
 void Pista::pousarAviao(Aviao& aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
-	std::cout << "Avião " << aviao << " pousando na pista " << num << std::endl;
+	std::cout << "Avião " << aviaoNaPista << " pousando na pista " << num << std::endl;
 }
 
 void Pista::decolarAviao(Aviao&  aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
-	std::cout << "Avião:  " << aviao << "  pousando na pista " << num << std::endl;
+	std::cout << "Avião:  " << aviaoNaPista << "  decolando na pista " << num << std::endl;
 }
 
 void Pista::atualizarEstado() {
