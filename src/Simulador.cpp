@@ -13,12 +13,7 @@
 #include<iostream>
 #include "Aviao.hpp"
 
-Simulador::Simulador(int TEMPO_SIMULACAO) :
-TEMPO_SIMULACAO(TEMPO_SIMULACAO),
-		tempoAtual(0), IDAviaoPar(2), IDAviaoImp(1), pista1(1), pista2(2), pista3(3), pousosDeEmergencia(
-				0), pousosNormais(0), totalDePousos(0), totalPousosEmergencias(
-				0), numDecolagens(0), somaDosTemposDeEsperaDecolagem(0), somaDosTemposPousos(
-				0) {}
+Simulador::Simulador(int TEMPO_SIMULACAO) : tempoAtual(0), IDAviaoPar(2), IDAviaoImp(1), TEMPO_SIMULACAO(TEMPO_SIMULACAO), pista1(1), pista2(2), pista3(3), totalPousos(0), totalDecolagens(0), pousosDeEmergencia(0), somaTempoDec(0), somaTempoPouso(0) {}
 
 
 ListaAviao * Simulador::verificarMenorFilaAterr() {
@@ -50,21 +45,19 @@ ListaAviao * Simulador::menorFilaDec() {
 void Simulador::criarAvioes() {
 	int avioesParaDecolar = rand() % 4;
 	int avioesParaPousar = rand() % 4;
-	int IDaviaoImp = IDAviao;
-	int IDaviaoPar = IDAviao + 1;
 
 	for (int i = 0; i < avioesParaPousar; i++) {
 		int combustivel = rand() % 21;
-		ListaAviao &filaParaEnfileirar = verificarMenorFilaAterr();
+		ListaAviao &filaParaEnfileirar = *verificarMenorFilaAterr();
 		filaParaEnfileirar.enfileirar(
-				Aviao(combustivel, IDaviaoImp, tempoAtual, true));
-		IDaviaoImp += 2;
+				Aviao(combustivel, IDAviaoImp, tempoAtual, true));
+		IDAviaoImp += 2;
 	}
 
 	for (int i = 0; i < avioesParaDecolar; i++) {
-		ListaAviao &fila = menorFilaDec();
-		fila.enfileirar(Aviao(0, IDaviaoPar, tempoAtual, false));
-		IDaviaoPar += 2;
+		ListaAviao &fila = *menorFilaDec();
+		fila.enfileirar(Aviao(0, IDAviaoPar, tempoAtual, false));
+		IDAviaoPar += 2;
 	}
 
 }
@@ -94,83 +87,7 @@ void Simulador::desocuparPistas() {
 	}
 }
 
-void Simulador::pousandoEmergencias() {
-	ListaAviao *listaDeFilasDePouso[] = { &filaAterrissagem1A,
-			&filaAterrissagem1B, &filaAterrissagem2A, &filaAterrissagem2B };
-	Aviao a;
-	for (int i = 0; i < 4 && pousosDeEmergencia < 3; i++) {
-		if (listaDeFilasDePouso[i]->temEmergencia()) {
 
-			if (!pista3.estaOcupada()) {
-				a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(
-						listaDeFilasDePouso[i]->noComMaisEmergencia());
-				pista3.pousarAviao(a);
-				pousosDeEmergencia++;
-			} else if (!pista1.estaOcupada()) {
-				a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(
-						listaDeFilasDePouso[i]->noComMaisEmergencia());
-				pista1.pousarAviao(a);
-				pousosDeEmergencia++;
-			} else if (!pista2.estaOcupada()) {
-				a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(
-						listaDeFilasDePouso[i]->noComMaisEmergencia());
-				pista2.pousarAviao(a);
-				pousosDeEmergencia++;
-			}
-		}
-	}
-}
-
-void Simulador::pousosRegulares() {
-	pousosNormais = 0;
-	ListaAviao *listaDeFilasDePouso[] = { &filaAterrissagem1A,
-			&filaAterrissagem1B, &filaAterrissagem2A, &filaAterrissagem2B };
-	Aviao a;
-	for (int i = 0; i < 4 && pousosNormais <= 3; i++) {
-
-		if (i == 0 || i == 1) {
-			if (!pista1.estaOcupada()) {
-				a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(
-						listaDeFilasDePouso[i]->noComMaisTempoDeEspera());
-				pista1.pousarAviao(a);
-				pousosNormais++;
-			}
-		} else if (i == 2 || i == 3) {
-			if (!pista2.estaOcupada()) {
-				a = listaDeFilasDePouso[i]->desenfileirarAviaoPosicao(
-						listaDeFilasDePouso[i]->noComMaisTempoDeEspera());
-				pista2.pousarAviao(a);
-				pousosNormais++;
-			}
-		}
-	}
-	totalPousosEmergencias += pousosDeEmergencia;
-	totalDePousos += pousosNormais + pousosDeEmergencia;
-}
-
-void Simulador::decolandoAvioes() {
-	ListaAviao *listaDeFilasDecolagem[] = { &filaDecolagem1, &filaDecolagem2,
-			&filaDecolagem3 };
-	for (int i = 0; i < 2; i++) {
-		if (!pista1.estaOcupada() || !pista2.estaOcupada()
-				|| !pista3.estaOcupada()) {
-			Aviao a = listaDeFilasDecolagem[i]->desenfileirarAviaoPosicao(
-					listaDeFilasDecolagem[i]->noComMaisTempoDeEspera());
-			if (!pista1.estaOcupada()) {
-				pista1.decolarAviao(a);
-				numDecolagens++;
-			}
-			if (!pista2.estaOcupada()) {
-				pista2.decolarAviao(a);
-				numDecolagens++;
-			}
-			if (!pista3.estaOcupada()) {
-				pista3.decolarAviao(a);
-				numDecolagens++;
-			}
-		}
-	}
-}
 
 void Simulador::imprimirFilasDePouso() {
 	ListaAviao * filas[] = {&filaAterrissagem1A, &filaAterrissagem1B, &filaAterrissagem2A, &filaAterrissagem2B};
@@ -193,10 +110,20 @@ void Simulador::imprimirInfoAcada10un() {
 	imprimirFilaDecolagem();
 }
 
+
 void Simulador::simulacaoUnidadesDeTempo() {
 	criarAvioes();
 	decrementarComb();
-	pousandoEmergencias();
-	pousosRegulares();
-	decolandoAvioes();
+	aumentarTempoDeEspera();
+	desocuparPistas();
+}
+
+void Simulador::executar() {
+	while (tempoAtual != TEMPO_SIMULACAO) {
+		simulacaoUnidadesDeTempo();
+		tempoAtual++;
+		if (tempoAtual % 10 == 0) {
+			imprimirInfoAcada10un();
+		}
+	}
 }

@@ -36,9 +36,7 @@ bool operator <(const Aviao &aviao, const Aviao &aviao2) {
 
 bool operator >(const Aviao &a1, const Aviao &a2) {
 	if( a1.tempoEspera > a2.tempoEspera) {
-		return a1;
-	} else if (a2.tempoEspera > a1.tempoEspera) {
-		return a2;
+		return true;
 	}
 	return false;
 }

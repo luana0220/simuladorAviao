@@ -22,13 +22,13 @@ private:
 	int IDAviaoPar;
 	int IDAviaoImp;
 	int TEMPO_SIMULACAO;
-	int IDAviao;
 	Pista pista1, pista2, pista3;
+	int totalPousos;
+	int totalDecolagens;
 	int pousosDeEmergencia;
-	int totalDePousos;
-	int pousosNormais;
-	int totalPousosEmergencias;
-	int numDecolagens;
+	int somaTempoDec;
+	int somaTempoPouso;
+
 
 	//Filas de aterrisagem(2 para pista 1, e duas para pista2)
 	ListaAviao filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B;
@@ -42,8 +42,6 @@ private:
 	ListaAviao * verificarMenorFilaAterr();
 	ListaAviao *  menorFilaDec();
 	void verificarEmergencias();
-	Simulador(const int TEMPO_SIMULACAO);
-	void executar();
 	void pousandoEmergencias();
 	void pousosRegulares();
 	void desocuparPistas();

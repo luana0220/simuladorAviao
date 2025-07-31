@@ -134,7 +134,7 @@ void ListaAviao::imprimirAvioes() {
 	}
 	NoDeAviao * temp = primeiro;
 	while(temp != nullptr) {
-		std::cout << temp->dado.imprimirAviao(temp->dado) << "  " << std::endl;
+		temp->dado.imprimirAviao(temp->dado);
 		temp = temp->proximo;
 	}
 }
