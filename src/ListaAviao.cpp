@@ -51,9 +51,6 @@ Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 	if(no == nullptr) {
 		throw std::invalid_argument("Nó inválido!");
 	}
-	if(estaVazia()) {
-			throw std::runtime_error("Fila Vazia!!1");
-		}
 
 	NoDeAviao * anterior = nullptr;
 	NoDeAviao * NoAtual = primeiro;
@@ -75,9 +72,6 @@ Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 
 
 bool ListaAviao::temEmergencia() {
-	if(estaVazia()) {
-			throw std::runtime_error("Fila Vazia!!2");
-		}
 	NoDeAviao * noAtual = primeiro;
 	while(noAtual != nullptr) {
 		if(noAtual->dado.combustivel <= 0) {
@@ -91,19 +85,14 @@ bool ListaAviao::temEmergencia() {
 
 NoDeAviao * ListaAviao::noComMaisEmergencia() {
 
-	if(estaVazia()) {
-				throw std::runtime_error("Fila Vazia!!0");
-		}
 	NoDeAviao *NoAtual = primeiro;
 
 	NoDeAviao *noMenor = primeiro;
 
 	while (NoAtual != nullptr) {
-		if(NoAtual->dado.ehPouso) {
 			if (NoAtual->dado < noMenor->dado) {
 				noMenor = NoAtual;
 			}
-		}
 		NoAtual = NoAtual->proximo;
 	}
 	std::cout << noMenor->dado;
@@ -111,22 +100,14 @@ NoDeAviao * ListaAviao::noComMaisEmergencia() {
 }
 
 void ListaAviao::decrementarComb() {
-	if(estaVazia()) {
-			throw std::runtime_error("Fila Vazia!!3");
-	}
 	NoDeAviao *noAtual = primeiro;
 	while (noAtual != nullptr) {
-		if(noAtual->dado.ehPouso) {
 		noAtual->dado.decrementarCombAviao();
-		}
 		noAtual = noAtual->proximo;
 	}
 }
 
 void ListaAviao::aumentarTempoEspera() {
-	if(estaVazia()) {
-			throw std::runtime_error("Fila Vazia!!4");
-		}
 	NoDeAviao *noAtual = primeiro;
 	while (noAtual != nullptr) {
 		noAtual->dado.aumentarTempoDeEspera();
@@ -134,31 +115,26 @@ void ListaAviao::aumentarTempoEspera() {
 	}
 }
 
-NoDeAviao* ListaAviao::noComMaisTempoDeEspera() {
-	if (estaVazia()) {
-		throw std::runtime_error("Fila Vazia!!5");
-	}
+NoDeAviao * ListaAviao::noComMaisTempoDeEspera() {
 	NoDeAviao *NoAtual = primeiro;
 	NoDeAviao *noMaior = primeiro;
 
-	while (NoAtual != nullptr) {
+	while(NoAtual != nullptr) {
 		if (NoAtual->dado > noMaior->dado) {
 			noMaior = NoAtual;
 		}
 		NoAtual = NoAtual->proximo;
 	}
-
-	std::cout << noMaior->dado;
 	return noMaior;
 }
 
 void ListaAviao::imprimirAvioes() {
 	if(estaVazia()) {
-		throw std::runtime_error("Fila Vazia!!6");
+		throw std::runtime_error("Fila Vazia!!");
 	}
 	NoDeAviao * temp = primeiro;
 	while(temp != nullptr) {
-	   temp->dado.imprimirAviao(temp->dado);
-	   temp = temp->proximo;
+		std::cout << temp->dado.imprimirAviao(temp->dado) << "  " << std::endl;
+		temp = temp->proximo;
 	}
 }
