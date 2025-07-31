@@ -21,7 +21,7 @@ private:
 	int tempoAtual;
 	int IDAviaoPar;
 	int IDAviaoImp;
-	const int TEMPO_SIMULACAO = 60;
+	int TEMPO_SIMULACAO;
 	Pista pista1, pista2, pista3;
 	int pousosDeEmergencia;
 	int totalDePousos;
@@ -56,7 +56,7 @@ private:
 	float mediaTempoPousos();
 public:
 	void executar();
-	Simulador(const int TEMPO_SIMULACAO);
+	Simulador(int TEMPO_SIMULACAO);
 };
 
 

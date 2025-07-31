@@ -106,6 +106,7 @@ NoDeAviao * ListaAviao::noComMaisEmergencia() {
 		}
 		NoAtual = NoAtual->proximo;
 	}
+	std::cout << noMenor->dado;
 	return noMenor;
 }
 
@@ -147,6 +148,7 @@ NoDeAviao* ListaAviao::noComMaisTempoDeEspera() {
 		NoAtual = NoAtual->proximo;
 	}
 
+	std::cout << noMaior->dado;
 	return noMaior;
 }
 

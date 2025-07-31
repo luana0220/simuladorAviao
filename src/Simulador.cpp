@@ -13,12 +13,13 @@
 #include<iostream>
 #include "Aviao.hpp"
 
-Simulador::Simulador(const int TEMPO_SIMULACAO) :
+Simulador::Simulador(int TEMPO_SIMULACAO) :
+TEMPO_SIMULACAO(TEMPO_SIMULACAO),
 		tempoAtual(0), IDAviaoPar(2), IDAviaoImp(1), pista1(1), pista2(2), pista3(3), pousosDeEmergencia(
 				0), pousosNormais(0), totalDePousos(0), totalPousosEmergencias(
 				0), numDecolagens(0), somaDosTemposDeEsperaDecolagem(0), somaDosTemposPousos(
-				0) {
-}
+				0) {}
+
 
 ListaAviao* Simulador::verificarMenorFilaAterr() {
 	ListaAviao *menorFila = &filaAterrissagem1A;
