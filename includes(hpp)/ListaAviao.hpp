@@ -23,12 +23,12 @@ private:
 public:
 	ListaAviao();
 	~ListaAviao();
-
+	void desenfileirarInicio();
 	void enfileirar(const Aviao& dado);
 	bool estaVazia();
 	int size();
 	NoDeAviao * primeiroFila();
-	Aviao desenfileirarAviaoPosicao(NoDeAviao * no);
+	void desenfileirarAviaoPosicao(NoDeAviao * no);
 	void decrementarComb();
 	bool temEmergencia();
 	NoDeAviao * noComMaisEmergencia();

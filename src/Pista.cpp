@@ -17,7 +17,7 @@ void Pista::pousarAviao(Aviao& aviao) {
 void Pista::decolarAviao(Aviao&  aviao) {
 	estaSendoUsada = true;
 	aviaoNaPista = aviao;
-	std::cout << "Avião:  " << aviao << "  pousando na pista " << num << std::endl;
+	std::cout << "Avião:  " << aviao << "  decolando na pista " << num << std::endl;
 }
 
 void Pista::atualizarEstado() {

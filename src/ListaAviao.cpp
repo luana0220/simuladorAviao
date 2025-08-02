@@ -44,12 +44,18 @@ int ListaAviao::size() {
 }
 
 NoDeAviao * ListaAviao::primeiroFila() {
+	if(estaVazia()) {
+		throw std::runtime_error("Fila Vazia");
+	}
 	return primeiro;
 }
 
-Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
+void ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 	if(no == nullptr) {
 		throw std::invalid_argument("Nó inválido!");
+	}
+	if(no == primeiro) {
+		return desenfileirarInicio();
 	}
 
 	NoDeAviao * anterior = nullptr;
@@ -58,7 +64,7 @@ Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 		anterior = NoAtual;
 		NoAtual = NoAtual->proximo;
 	}
-	Aviao a = NoAtual->dado;
+
 	if (anterior == nullptr) {
 		primeiro = NoAtual->proximo;
 	} else {
@@ -67,7 +73,6 @@ Aviao ListaAviao::desenfileirarAviaoPosicao(NoDeAviao * no) {
 
 	delete NoAtual;
 	tamanho--;
-	return a;
 }
 
 
@@ -137,4 +142,15 @@ void ListaAviao::imprimirAvioes() {
 		temp->dado.imprimirAviao(temp->dado);
 		temp = temp->proximo;
 	}
+}
+
+void ListaAviao::desenfileirarInicio() {
+	if(estaVazia()) {
+		throw std::runtime_error("Fila Vazia");
+	}
+	NoDeAviao * temp = primeiro;
+	primeiro = primeiro->proximo;
+
+	delete temp;
+	tamanho--;
 }

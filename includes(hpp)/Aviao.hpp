@@ -31,7 +31,7 @@ struct Aviao {
 	friend std::ostream& operator<<(std::ostream &os, const Aviao &a);
 	friend bool operator<(const Aviao &a1, const Aviao &a2);
 	friend bool operator>(const Aviao &a1, const Aviao &a2);
-
+	friend bool operator==(const Aviao &a1, const Aviao &a2);
 	void imprimirAviao(const Aviao &a);
 	//friend
 

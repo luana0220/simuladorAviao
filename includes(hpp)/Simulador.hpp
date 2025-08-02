@@ -28,7 +28,9 @@ private:
 	int pousosDeEmergencia;
 	int somaTempoDec;
 	int somaTempoPouso;
-
+	int pousosEmergenciaPorUn;
+	int pousosRegularesPorUn;
+	int decolagensUn;
 
 	//Filas de aterrisagem(2 para pista 1, e duas para pista2)
 	ListaAviao filaAterrissagem1A, filaAterrissagem1B, filaAterrissagem2A, filaAterrissagem2B;
@@ -53,7 +55,7 @@ private:
 	float mediaTempoPousos();
 public:
 	void executar();
-	Simulador(int TEMPO_SIMULACAO);
+	Simulador(int tempo);
 };
 
 

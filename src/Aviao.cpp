@@ -23,15 +23,18 @@ void Aviao::aumentarTempoDeEspera() {
 	tempoEspera++;
 }
 
-std::ostream& operator<<(std::ostream &os, const Aviao &aviao) {
-	if (aviao.ehPouso) {
-		os << "{ ID: " << aviao.ID << ", Combustível: " << aviao.combustivel << " un. combustível, " << " Tempo de espera:  " << aviao.tempoEspera << " un. de tempo  }"<< std::endl;
+std::ostream& operator<<(std::ostream& os, const Aviao& a) {
+	if(a.ehPouso) {
+		os << "{ ID: " << a.ID << ", Combustível: " << a.combustivel
+		   << " un. combustível,  Tempo de espera: " << a.tempoEspera << " un. de tempo }";
+	} else {
+		os << "{ ID: " << a.ID << ", Tempo de espera: " << a.tempoEspera << " un. de tempo }";
 	}
 	return os;
 }
 
 bool operator <(const Aviao &aviao, const Aviao &aviao2) {
-	return aviao.combustivel <= aviao2.combustivel;
+	return aviao.combustivel < aviao2.combustivel;
 }
 
 bool operator >(const Aviao &a1, const Aviao &a2) {
