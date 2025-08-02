@@ -16,7 +16,11 @@ Aviao::Aviao(int comb, int id, int tempo, bool ehPouso) :
 }
 
 void Aviao::decrementarCombAviao() {
-	combustivel--;
+	if (ehPouso) {
+		if (combustivel > 0) {
+			combustivel--;
+		}
+	}
 }
 
 void Aviao::aumentarTempoDeEspera() {
@@ -25,10 +29,10 @@ void Aviao::aumentarTempoDeEspera() {
 
 std::ostream& operator<<(std::ostream& os, const Aviao& a) {
 	if(a.ehPouso) {
-		os << "{ ID: " << a.ID << ", Combustível: " << a.combustivel
-		   << " un. combustível,  Tempo de espera: " << a.tempoEspera << " un. de tempo }";
+		os << "{ ID: " << a.ID << " |  Combustível: " << a.combustivel
+		   << " un. combustível  |  Tempo de espera: " << a.tempoEspera << " un. de tempo }";
 	} else {
-		os << "{ ID: " << a.ID << ", Tempo de espera: " << a.tempoEspera << " un. de tempo }";
+		os << "{ ID: " << a.ID << " | Tempo de espera: " << a.tempoEspera << " un. de tempo }";
 	}
 	return os;
 }
@@ -46,8 +50,8 @@ bool operator >(const Aviao &a1, const Aviao &a2) {
 
 void Aviao::imprimirAviao(const Aviao &a) {
 		if(ehPouso) {
-			std::cout << " [ ID: " << a.ID << " Combustivel: " << a.combustivel << " ]" << std::endl;
+			std::cout << " [ ID: " << a.ID << " Combustivel: " << a.combustivel << " ]" << "  ";
 		} else
-			std::cout << " [ ID: " << a.ID << " ]" << std::endl;
+			std::cout << " [ ID: " << a.ID << " ]" << "  ";
 	}
 

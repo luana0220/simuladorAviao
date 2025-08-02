@@ -38,12 +38,10 @@ private:
 
 	void criarAvioes();
 	void decrementarComb();
-	void usarPista();
 	void aumentarTempoDeEspera();
 	void simulacaoUnidadesDeTempo();
 	ListaAviao * verificarMenorFilaAterr();
 	ListaAviao *  menorFilaDec();
-	void verificarEmergencias();
 	void pousandoEmergencias();
 	void pousosRegulares();
 	void desocuparPistas();
@@ -53,6 +51,7 @@ private:
 	void imprimirFilaDecolagem();
 	float mediaTempoDeEsperaDecolagem();
 	float mediaTempoPousos();
+	void infoPorUn();
 public:
 	void executar();
 	Simulador(int tempo);

@@ -20,7 +20,6 @@ void ListaAviao::enfileirar(const Aviao& dado) {
 	ultimo = aviao;
 	}
 	tamanho++;
-	std::cout << "Aviao inserido!" << std::endl;
 }
 
 ListaAviao::~ListaAviao() {
@@ -100,7 +99,7 @@ NoDeAviao * ListaAviao::noComMaisEmergencia() {
 			}
 		NoAtual = NoAtual->proximo;
 	}
-	std::cout << noMenor->dado;
+
 	return noMenor;
 }
 
@@ -134,9 +133,6 @@ NoDeAviao * ListaAviao::noComMaisTempoDeEspera() {
 }
 
 void ListaAviao::imprimirAvioes() {
-	if(estaVazia()) {
-		throw std::runtime_error("Fila Vazia!!");
-	}
 	NoDeAviao * temp = primeiro;
 	while(temp != nullptr) {
 		temp->dado.imprimirAviao(temp->dado);
