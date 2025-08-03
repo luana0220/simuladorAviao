@@ -96,6 +96,10 @@ NoDeAviao * ListaAviao::noComMaisEmergencia() {
 	while (NoAtual != nullptr) {
 			if (NoAtual->dado < noMenor->dado) {
 				noMenor = NoAtual;
+			} else if(NoAtual->dado.combustivel == noMenor->dado.combustivel) {
+				if(NoAtual->dado > noMenor->dado) {
+					noMenor = NoAtual;
+				}
 			}
 		NoAtual = NoAtual->proximo;
 	}

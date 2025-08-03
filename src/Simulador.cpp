@@ -49,7 +49,7 @@ void Simulador::criarAvioes() {
 	int avioesParaPousar = rand() % 4;
 
 	for (int i = 0; i < avioesParaPousar; i++) {
-		int combustivel = 1 + rand() % 20;
+		int combustivel =  rand() % 20 + 1;
 		ListaAviao &filaParaEnfileirar = *verificarMenorFilaAterr();
 		Aviao a(combustivel, IDAviaoImp, 0, true);
 		filaParaEnfileirar.enfileirar(a);
@@ -60,7 +60,7 @@ void Simulador::criarAvioes() {
 
 	for (int i = 0; i < avioesParaDecolar; i++) {
 		ListaAviao &fila = *menorFilaDec();
-		Aviao a(0, IDAviaoPar, 0, false);
+		Aviao a(20, IDAviaoPar, 0, false);
 		fila.enfileirar(a);
 		IDAviaoPar += 2;
 		std::cout << "Avião:" << a << " inserido na fila de espera para decolagem" << std::endl;
@@ -93,7 +93,7 @@ void Simulador::aumentarTempoDeEspera() {
 void Simulador::desocuparPistas() {
 	std::cout << "DESOCUPANDO PISTAS..." << std::endl;
 	Pista *everyPistas[] = { &pista1, &pista2, &pista3 };
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		everyPistas[i]->atualizarEstado();
 	}
 }
@@ -144,7 +144,7 @@ void Simulador::imprimirFilaDecolagem() {
 
 void Simulador::imprimirInfoAcada10un() {
 	std::cout << std::endl;
-	std::cout << "-- Relatório das últimas 10 Un. --" << std::endl;
+	std::cout << "-- Relatório. --" << std::endl;
 	imprimirFilasDePouso();
 	imprimirFilaDecolagem();
 	std::cout << std::endl;
@@ -159,12 +159,13 @@ void Simulador::simulacaoUnidadesDeTempo() {
 	decrementarComb();
 	aumentarTempoDeEspera();
 	pousandoEmergencias();
-	if (!(pista1.estaOcupada() || pista2.estaOcupada())) {
+	if (!pista1.estaOcupada() || !pista2.estaOcupada()) {
 		pousosRegulares();
 	}
 
-	if(!pista1.estaOcupada() || !pista2.estaOcupada() || !pista3.estaOcupada()) {
-	decolandoAvioes();
+	if (!pista1.estaOcupada() || !pista2.estaOcupada()
+			|| !pista3.estaOcupada()) {
+		decolandoAvioes();
 	}
 	desocuparPistas();
 	std::cout << std::endl;
@@ -306,6 +307,8 @@ void Simulador::pousosRegulares() {
 				}
 			}
 		}
+	} else {
+		std::cout << "Impossimvel pousar" << std::endl;
 	}
 
 	totalPousos += pousosRegularesPorUn;
@@ -335,27 +338,35 @@ void Simulador::decolandoAvioes() {
 			Aviao a = noMaior->dado;
 			if (filaDoNo == &filaDecolagem1) {
 				if (!pista1.estaOcupada()) {
-					filaDoNo->desenfileirarAviaoPosicao(noMaior);
+					filaDoNo->desenfileirarInicio();
 					pista1.decolarAviao(a);
 					somaTempoDec += a.tempoEspera;
 					decolagensUn++;
 
+				} else {
+					std::cout << "Pista 1 ocupada! o Avião: " << a << "continua na fila de espera 1" << std::endl;
 				}
 			} else if (filaDoNo == &filaDecolagem2) {
 				if (!pista2.estaOcupada()) {
-					filaDoNo->desenfileirarAviaoPosicao(noMaior);
+					filaDoNo->desenfileirarInicio();
 					pista2.decolarAviao(a);
 				somaTempoDec += a.tempoEspera;
 				decolagensUn++;
 
+				} else {
+					std::cout << "Pista 2 ocupada! o Avião: " << a << "continua na fila de espera 2" << std::endl;
 				}
 			} else if (filaDoNo == &filaDecolagem3) {
 				if (!pista3.estaOcupada()) {
-					filaDoNo->desenfileirarAviaoPosicao(noMaior);
+					filaDoNo->desenfileirarInicio();
 					pista3.decolarAviao(a);
 				somaTempoDec += a.tempoEspera;
 				decolagensUn++;
 				}
+				else {
+				std::cout << "Pista 3 ocupada! o Avião: " << a
+						<< "continua na fila de espera 3" << std::endl;
+			}
 			}
 
 	}
