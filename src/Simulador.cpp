@@ -85,7 +85,7 @@ void Simulador::aumentarTempoDeEspera() {
 	ListaAviao *listaDeFilas[] = { &filaAterrissagem1A, &filaAterrissagem1B,
 			&filaAterrissagem2A, &filaAterrissagem2B, &filaDecolagem1,
 			&filaDecolagem2, &filaDecolagem3 };
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 7; i++) {
 		listaDeFilas[i]->aumentarTempoEspera();
 	}
 }
